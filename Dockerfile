@@ -32,7 +32,7 @@ RUN apt-get update \
         github.com/fatih/gomodifytags@latest  \
         github.com/mgechev/revive@latest  \
         github.com/go-delve/delve/cmd/dlv@latest 2>&1 \
-    && GO111MODULE=off go get github.com/uudashr/gopkgs 2>&1 \
+    && GO111MODULE=off go get github.com/uudashr/gopkgs/v2/cmd/gopkgs 2>&1 \
     #
     # Install Go tools w/o module support
     && go get -v github.com/alecthomas/gometalinter 2>&1 \
