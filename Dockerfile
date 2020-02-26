@@ -11,8 +11,8 @@ RUN apt-get update \
     #
     && mkdir -p /tmp/gotools \
     && cd /tmp/gotools \
-    && GO111MODULE=on go get -v golang.org/x/tools/gopls@latest 2>&1 \
     && GO111MODULE=on go get -v \
+        golang.org/x/tools/gopls@latest \
         honnef.co/go/tools/...@latest \
         golang.org/x/tools/cmd/gorename@latest \
         golang.org/x/tools/cmd/goimports@latest \
@@ -24,7 +24,6 @@ RUN apt-get update \
         github.com/sqs/goreturns@latest \
         github.com/josharian/impl@latest \
         github.com/davidrjenni/reftools/cmd/fillstruct@latest \
-        github.com/uudashr/gopkgs/cmd/gopkgs@latest  \
         github.com/ramya-rao-a/go-outline@latest  \
         github.com/acroca/go-symbols@latest  \
         github.com/godoctor/godoctor@latest  \
@@ -33,6 +32,7 @@ RUN apt-get update \
         github.com/fatih/gomodifytags@latest  \
         github.com/mgechev/revive@latest  \
         github.com/go-delve/delve/cmd/dlv@latest 2>&1 \
+    && GO111MODULE=off go get github.com/uudashr/gopkgs 2>&1 \
     #
     # Install Go tools w/o module support
     && go get -v github.com/alecthomas/gometalinter 2>&1 \
