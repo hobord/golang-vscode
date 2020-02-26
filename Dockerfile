@@ -50,8 +50,6 @@ RUN apt-get update \
     && curl -L -o protoc.zip $LATEST_PROTOC \
     && unzip protoc.zip -d protoc \
     && mv protoc/bin/protoc /go/bin/protoc \
-    && rm -Rf protoc \
-    && rm -f protoc.zip \
     #
     # Install grpc
     && GO111MODULE=on go get -u google.golang.org/grpc github.com/golang/protobuf/protoc-gen-go \
