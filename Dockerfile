@@ -7,7 +7,7 @@ ARG USER_GID=$USER_UID
 
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
-    && apt-get -y install git iproute2 procps lsb-release curl netcat telnet dnsutils jq unzip\
+    && apt-get -y install git iproute2 procps lsb-release curl netcat telnet dnsutils jq unzip \
     #
     && mkdir -p /tmp/gotools \
     && cd /tmp/gotools \
@@ -46,11 +46,12 @@ RUN apt-get update \
     && curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin 2>&1 \
     #
     # Install protoc
-    && export LATEST_PROTOC=`curl -s https://api.github.com/repos/protocolbuffers/protobuf/releases/latest | jq -r ".assets[] | select(.name | test(\"${spruce_type}\")) | .browser_download_url" | grep linux-x86_64.zip`; \
+    && LATEST_PROTOC=`curl -s https://api.github.com/repos/protocolbuffers/protobuf/releases/latest | jq -r ".assets[] | select(.name | test(\"${spruce_type}\")) | .browser_download_url" | grep linux-x86_64.zip` \
     && curl -L -o protoc.zip $LATEST_PROTOC \
     && unzip protoc.zip -d protoc \
     && mv protoc/bin/protoc /go/bin/protoc \
-    && rm -Rf protoc; rm -f protoc.zip; \
+    && rm -Rf protoc \
+    && rm -f protoc.zip \
     #
     # Install grpc
     && GO111MODULE=on go get -u google.golang.org/grpc github.com/golang/protobuf/protoc-gen-go \
